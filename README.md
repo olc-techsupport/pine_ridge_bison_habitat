@@ -1,2 +1,128 @@
-# pine_ridge_bison_habitat
-This series creates a data cube using Cubedynamics and public data about the Pine Ridge Indian Reservation. The intent of the data cube is to explore and visualize data needed for bison to thrive. 
+# Pine Ridge Bison Habitat Suitability Analysis
+**Author:** Lilly Jones, PhD, Daear Consulting, LLC
+**Partner:** Oglala Lakota College (OLC)
+**Territory:** Pine Ridge Reservation, Oglala Lakota Nation  
+**License:** GNU Affero 3.0
+
+## Purpose
+This repository supports the Oglala Lakota Nation's bison habitat restoration
+program by providing a reproducible, spatially explicit assessment of land
+suitability for bison across the full Pine Ridge Reservation.
+
+Bison are not just a wildlife management objective. For the Oglala Lakota,
+bison (Pte Oyate) are central to cultural identity, food sovereignty, and
+land stewardship. Restoring bison habitat to Pine Ridge is an act of ecological
+and cultural restoration simultaneously. This analysis is designed to
+support that work by identifying which lands are most ready, which need
+investment before they can carry herds, and how climate change will affect
+habitat capacity over time.
+
+## What This Repository Produces
+**Bison Habitat Suitability Index (BHSI)** is a pixel-level composite
+score (0–1) across the full Pine Ridge Reservation, synthesizing:
+- Vegetation condition and type (NDVI and NLCD land cover)
+- Soil grazing capacity (gSSURGO)
+- Topographic suitability (slope, aspect)
+- Water access (distance to streams, ponds, springs)
+- Climate stress (heat days, precipitation trends)
+
+**Priority restoration units** are viable bison habitat patches identified
+by DBSCAN clustering of high-BHSI pixels, ranked by composite score and
+accompanied by a summary table of area, water access, soils quality, and
+current land cover. See `docs/methods_clustering.md` for the full
+rationale for this approach.
+
+## Notebooks
+| Notebook | Topic | Outputs |
+|---|---|---|
+| 01 | Study area and data inventory | Pine Ridge boundary, data coverage map |
+| 02 | Vegetation condition | NDVI trend, land cover classification |
+| 03 | Soils and grazing capacity | gSSURGO grazing capacity surface |
+| 04 | Topography | Slope, aspect, terrain suitability |
+| 05 | Water access | Distance-to-water raster |
+| 06 | Climate stress | Heat days, precip projections (MACAv2) |
+| 07 | Bison Habitat Suitability Index | BHSI raster and priority restoration units |
+
+## Data Sources
+All data is downloaded at runtime and cached to `data/cache/`. Nothing
+is committed to this repository.
+
+| Source | What | Notebook |
+|---|---|---|
+| Census TIGER AIANNH | Pine Ridge boundary | 01 |
+| MODIS MOD13Q1 via ORNL DAAC | NDVI time series | 02 |
+| NLCD 2021 via MRLC | Land cover | 02 |
+| USDA gSSURGO via SoilDataAccess | Grazing capacity | 03 |
+| USGS 3DEP (1/3 arc-second) | Elevation model | 04 |
+| USGS NHD | Streams, water bodies | 05 |
+| MACAv2-METDATA via OPeNDAP | Climate projections | 06 |
+
+## Quick Start
+```bash
+# Clone
+git clone https://github.com/your-org/pine_ridge_bison_habitat
+cd pine_ridge_bison_habitat
+
+# Environment
+conda env create -f environment.yml
+conda activate pine-ridge-bison
+python -m ipykernel install --user --name pine-ridge-bison \
+    --display-name "Python (pine-ridge-bison)"
+
+# Launch
+jupyter lab notebooks/
+```
+
+Run notebooks in order 01 through 07. Each notebook exports intermediate
+results to `outputs/` that the next notebook loads.
+
+## Repository Structure
+```
+pine_ridge_bison_habitat/
+├── notebooks/
+│   ├── 01_study_area.ipynb
+│   ├── 02_vegetation.ipynb
+│   ├── 03_soils.ipynb
+│   ├── 04_topography.ipynb
+│   ├── 05_water_access.ipynb
+│   ├── 06_climate_stress.ipynb
+│   └── 07_habitat_suitability_index.ipynb
+├── src/
+│   ├── loaders.py           # Data download and cache functions
+│   ├── raster_utils.py      # Raster alignment, resampling, normalization
+│   ├── constants.py         # Bounding box, CRS, paths, weights
+│   └── sovereignty.py       # Data governance acknowledgment
+├── data/
+│   └── cache/               # GITIGNORED — downloaded datasets
+├── outputs/                 # GITIGNORED — intermediate and final products
+│   └── figures/
+├── docs/
+│   ├── data_sovereignty.md
+│   ├── methods_clustering.md
+│   └── bhsi_weights.md
+├── environment.yml
+├── .gitignore
+└── README.md
+```
+
+## Data Sovereignty
+This analysis describes Oglala Lakota land for Oglala Lakota land
+restoration purposes. It is governed by:
+
+- **OCAP®** : Ownership, Control, Access, Possession
+- **CARE Principles** : Collective Benefit, Authority to Control,
+  Responsibility, Ethics
+- **FAIR Principles** : Findable, Accessible, Interoperable, Reusable
+- **IEEE 2890-2025** : Recommended Practice for Provenance of
+  Indigenous Peoples' Data
+
+All analysis results should be shared with the Oglala Lakota College
+Cubedynamics program and the relevant Oglala Lakota Nation land
+management offices before any external distribution.
+
+See `docs/data_sovereignty.md` for the full governance framework.
+
+## Citation
+Jones, L. (2025). Pine Ridge Bison Habitat Suitability Analysis.
+Daear Consulting, LLC, in partnership with
+Oglala Lakota College Cubedynamics Project.
