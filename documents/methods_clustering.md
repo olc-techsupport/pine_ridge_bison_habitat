@@ -74,7 +74,7 @@ This is a biological and management question:
 - What is the minimum land area for a starter bison herd?
 - What is the minimum area that can be economically fenced and managed?
 
-If OLC's program considers 250 acres viable for an initial herd,
+If OST's program considers 250 acres viable for an initial herd,
 set `DBSCAN_MIN_ACRES = 250`. The analysis recalculates automatically.
 
 Both parameters are defined in `src/constants.py` and can be changed

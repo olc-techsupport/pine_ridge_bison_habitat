@@ -2,7 +2,7 @@
 **Author:** Lilly Jones, PhD, Daear Consulting, LLC
 **Partner:** Oglala Lakota College (OLC)  
 **Territory:** Pine Ridge Reservation, Oglala Lakota Nation  
-**License:** GNU Affero 3.0
+**License:**  GNU AFFERO GENERAL PUBLIC LICENSE V.3
 
 ## Purpose
 This repository supports the Oglala Lakota Nation's bison habitat restoration
