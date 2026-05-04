@@ -1,6 +1,6 @@
 # Pine Ridge Bison Habitat Suitability Analysis
 **Author:** Lilly Jones, PhD, Daear Consulting, LLC
-**Partner:** Oglala Lakota College (OLC)
+**Partner:** Oglala Lakota College (OLC)  
 **Territory:** Pine Ridge Reservation, Oglala Lakota Nation  
 **License:** GNU Affero 3.0
 
@@ -93,8 +93,8 @@ pine_ridge_bison_habitat/
 │   ├── constants.py         # Bounding box, CRS, paths, weights
 │   └── sovereignty.py       # Data governance acknowledgment
 ├── data/
-│   └── cache/               # GITIGNORED — downloaded datasets
-├── outputs/                 # GITIGNORED — intermediate and final products
+│   └── cache/               # GITIGNORED: downloaded datasets
+├── outputs/                 # GITIGNORED: intermediate and final products
 │   └── figures/
 ├── docs/
 │   ├── data_sovereignty.md
